@@ -1,0 +1,65 @@
+@use "../../../../styles/abstracts/breakpoints.scss";
+@use "../../../../styles/abstracts/colors.scss";
+
+.continents {
+  // background-color: yellow;
+  margin: 0 auto;
+  border: 1px solid black;
+  max-width: 48.75rem;
+  text-align: center;
+  font-family: "RobotoSlab";
+  padding: 0 0.7rem;
+  box-shadow: 0 0.0625rem 0.25rem rgba(black, 0.1),
+    0 0 0.125rem rgba(black, 0.1);
+  border: none;
+  color: colors.$gray-primary;
+  background-color: white;
+  @include breakpoints.md {
+    max-width: 500px;
+  }
+  @include breakpoints.l {
+    max-width: 48.75rem;
+  }
+  &__motto {
+    padding: 1rem;
+    font-size: 0.675rem;
+  }
+  &__icons {
+    padding: 1rem;
+    font-size: 0.675rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: colors.$brown-primary;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+
+    &__item {
+      cursor: pointer;
+      min-width: 75px;
+      width: 30%;
+      @include breakpoints.md {
+        width: 25%;
+      }
+      @include breakpoints.l {
+        width: auto;
+      }
+      &:hover {
+        color: colors.$brown-secondary;
+        font-weight: bold;
+      }
+    }
+
+    img {
+      height: 1.7rem;
+      width: 1.7rem;
+    }
+  }
+}
+
+.lead {
+  font-size: 1.475rem;
+  margin-left: 0.625rem;
+  margin-right: 0.625rem;
+  line-height: 1.57;
+}

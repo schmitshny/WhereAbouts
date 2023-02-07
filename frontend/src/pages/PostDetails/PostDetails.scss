@@ -1,0 +1,97 @@
+@use "../../styles/abstracts/breakpoints.scss";
+@use "../../styles/abstracts/colors.scss";
+
+.postDetails {
+  background-color: colors.$gray-body;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Roboto-Slab";
+
+  @include breakpoints.l {
+    flex-direction: row;
+  }
+  &__section {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    position: relative;
+    color: colors.$gray-primary;
+    @include breakpoints.l {
+      width: 50%;
+    }
+
+    &__title {
+      //   font-family: $Welcome;
+      font-size: 2.3rem;
+      display: block;
+    }
+
+    h5 {
+      font-size: 1rem;
+      color: colors.$gray-primary;
+    }
+
+    h6 {
+      font-size: 0.79rem;
+    }
+
+    &__message {
+      flex-grow: 1;
+      display: flex;
+      //   justify-content: center;
+      align-items: center;
+      margin: 1rem 0;
+    }
+
+    &__comments {
+      margin-top: 2rem;
+    }
+
+    &__tags {
+      font-size: 0.9rem;
+      color: colors.$brown-primary;
+      text-align: left;
+    }
+  }
+
+  &__image {
+    // max-height: 400px;
+    @include breakpoints.l {
+      max-height: 100%;
+      width: 50%;
+    }
+    img {
+      border-radius: 0;
+      width: 100%;
+
+      //   max-height: 400px;
+      object-fit: cover;
+      @include breakpoints.l {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+// .corner {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   width: 120px;
+
+//   img {
+//     height: 60px;
+//     // @include breakpoints.md  {
+//     //   width: 150px;
+
+//     //   height: auto;
+//     // }
+//     // @include sm {
+//     //   width: 90px;
+
+//     //   height: auto;
+//     // }
+//   }
+// }

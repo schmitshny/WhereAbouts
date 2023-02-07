@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signup = exports.signin = void 0;
+exports.getUserInfo = exports.editAccount = exports.setAvatar = exports.signup = exports.changePassword = exports.signin = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
@@ -35,8 +35,28 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signin = signin;
+const changePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { currentPassword, newPassword, userId } = req.body;
+    try {
+        const user = yield user_1.default.findById(userId);
+        if (!user) {
+            return res.status(500).json({ message: "Something went wrong" });
+        }
+        const isPasswordCorrect = yield bcryptjs_1.default.compare(currentPassword, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: "Invalid password" });
+        }
+        const hashPassword = yield bcryptjs_1.default.hash(newPassword, 12);
+        yield user.updateOne({ password: hashPassword });
+        return res.status(200).json({ message: "Password updated!" });
+    }
+    catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+exports.changePassword = changePassword;
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password, confirmPassword, firstName, lastName } = req.body;
+    const { email, password, confirmPassword, name, lastName } = req.body;
     try {
         const existingUser = yield user_1.default.findOne({ email });
         if (existingUser) {
@@ -49,7 +69,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const newUser = yield user_1.default.create({
             email,
             password: hashPassword,
-            name: firstName,
+            name,
             lastName,
         });
         const token = jsonwebtoken_1.default.sign({ email: newUser.email, id: newUser._id }, "test", {
@@ -62,3 +82,48 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signup = signup;
+const setAvatar = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const avatarImage = req.body.image;
+        const userData = yield user_1.default.findByIdAndUpdate(userId, { avatarImage: avatarImage }, {
+            new: true,
+        });
+        if (userData) {
+            res.json({ isSet: true });
+        }
+    }
+    catch (_b) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+exports.setAvatar = setAvatar;
+const editAccount = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const { email, name, lastName, bio } = req.body;
+        const updatedUser = yield user_1.default.findByIdAndUpdate(userId, {
+            $set: { email, name, lastName, bio },
+        }, {
+            new: true,
+        });
+        res.json(updatedUser);
+    }
+    catch (_c) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+exports.editAccount = editAccount;
+const getUserInfo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const user = yield user_1.default.findById(userId).select("name lastName avatarImage");
+        if (user) {
+            res.json(user);
+        }
+    }
+    catch (_d) {
+        res.status(500).json({ message: "Something went wrong" });
+    }
+});
+exports.getUserInfo = getUserInfo;

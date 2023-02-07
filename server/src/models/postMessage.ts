@@ -1,10 +1,11 @@
 import { Schema, model } from "mongoose";
+import { User } from "./user";
 
 interface Post {
   title: string;
   message: string;
   name: string;
-  creator: string;
+  creator: User;
   tags: [string];
   selectedFile: string;
   createdAt: Date;
@@ -15,7 +16,7 @@ interface Post {
 const postSchema = new Schema<Post>({
   title: String,
   message: String,
-  creator: String,
+  creator: { type: Schema.Types.ObjectId, ref: "User" },
   name: String,
   tags: [String],
   selectedFile: String,

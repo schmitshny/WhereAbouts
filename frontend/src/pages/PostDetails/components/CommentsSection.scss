@@ -1,0 +1,22 @@
+@use "../../../styles/abstracts/breakpoints.scss";
+
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  @include breakpoints.l {
+  }
+
+  &__comments {
+    width: 50%;
+    justify-self: flex-start;
+    text-align: left;
+  }
+  &__textfield {
+    justify-self: center;
+    align-self: center;
+    button {
+      margin-top: 0.5rem;
+    }
+  }
+}

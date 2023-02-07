@@ -17,10 +17,6 @@ app.use(cors());
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
-// app.get("/", (_, res) => {
-//   res.send("Server is running");
-// });
-
 const PORT = process.env.PORT || 5000;
 
 mongoose

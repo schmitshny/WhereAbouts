@@ -8,4 +8,8 @@ const user_1 = require("../controllers/user");
 const router = express_1.default.Router();
 router.post("/signin", user_1.signin);
 router.post("/signup", user_1.signup);
+router.patch("/setAvatar/:id", user_1.setAvatar);
+router.patch("/editAccount/:id", user_1.editAccount);
+router.patch("/changePassword", user_1.changePassword);
+router.get("/getUserInfo/:id", user_1.getUserInfo);
 exports.default = router;

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.commentPost = exports.likePost = exports.deletePost = exports.updatePost = exports.createPost = exports.searchPosts = exports.getSinglePost = exports.getPosts = void 0;
+exports.commentPost = exports.likePost = exports.deletePost = exports.updatePost = exports.createPost = exports.searchPosts = exports.getUserPosts = exports.getSinglePost = exports.getPosts = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const postMessage_1 = __importDefault(require("../models/postMessage"));
 const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -24,7 +24,8 @@ const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const posts = yield postMessage_1.default.find()
             .sort({ _id: -1 })
             .limit(LIMIT)
-            .skip(startIndex);
+            .skip(startIndex)
+            .populate({ path: "creator", select: "name avatarImage" });
         res.status(200).json({
             data: posts,
             currentPage: Number(page),
@@ -39,7 +40,10 @@ exports.getPosts = getPosts;
 const getSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const post = yield postMessage_1.default.findById(id);
+        const post = yield postMessage_1.default.findById(id).populate({
+            path: "creator",
+            select: "name avatarImage",
+        });
         res.status(200).json(post);
     }
     catch (error) {
@@ -47,6 +51,17 @@ const getSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getSinglePost = getSinglePost;
+const getUserPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { creatorId } = req.params;
+    try {
+        const posts = yield postMessage_1.default.find({ creator: creatorId });
+        res.status(200).json(posts);
+    }
+    catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+exports.getUserPosts = getUserPosts;
 const searchPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { searchQuery, tags } = req.query;
     try {
@@ -54,7 +69,7 @@ const searchPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const posts = yield postMessage_1.default.find({
             $or: [{ title }, { tags: { $in: tags === null || tags === void 0 ? void 0 : tags.toString().split(",") } }],
         });
-        res.json({ data: posts });
+        res.json(posts);
     }
     catch (error) {
         res.status(404).json({ message: error.message });
@@ -68,7 +83,7 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         message: message !== "" ? message : "No message",
         selectedFile,
         tags,
-        name,
+        name: req.userId,
         creator: req.userId,
         createdAt: new Date().toISOString(),
     });
@@ -121,6 +136,9 @@ const likePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const updatedPost = yield postMessage_1.default.findByIdAndUpdate(id, post, {
             new: true,
+        }).populate({
+            path: "creator",
+            select: "name avatarImage",
         });
         res.json(updatedPost);
     }
@@ -134,6 +152,9 @@ const commentPost = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         post.comments.push(comment);
         const updatedPost = yield postMessage_1.default.findByIdAndUpdate(id, post, {
             new: true,
+        }).populate({
+            path: "creator",
+            select: "name avatarImage",
         });
         res.json(updatedPost);
     }

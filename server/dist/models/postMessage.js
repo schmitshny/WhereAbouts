@@ -4,7 +4,7 @@ const mongoose_1 = require("mongoose");
 const postSchema = new mongoose_1.Schema({
     title: String,
     message: String,
-    creator: String,
+    creator: { type: mongoose_1.Schema.Types.ObjectId, ref: "User" },
     name: String,
     tags: [String],
     selectedFile: String,

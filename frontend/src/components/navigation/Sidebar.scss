@@ -1,0 +1,87 @@
+@use "../../styles/abstracts/breakpoints.scss";
+@use "../../styles/abstracts/colors.scss";
+
+.sidebar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: colors.$pink-primary;
+  box-shadow: 0 0.0625rem 0.25rem rgba(black, 0.1),
+    0 0 0.125rem rgba(black, 0.1);
+
+  @include breakpoints.md {
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    box-shadow: 0 0.0625rem 0.25rem rgba(black, 0.1),
+      0 0 0.125rem rgba(black, 0.1);
+    bottom: auto;
+    width: auto;
+    background-color: transparent;
+  }
+
+  ul {
+    padding: 0.2rem;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    @include breakpoints.md {
+      display: block;
+      padding: 1rem 1rem 1rem 1rem;
+    }
+    li {
+      font-size: 1rem;
+      padding: 0.7rem 1.4rem 0.7rem 1.4rem;
+      margin-bottom: 0.4rem;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        color: white;
+        @include breakpoints.md {
+          color: #363636;
+        }
+      }
+      @include breakpoints.md {
+        color: #363636;
+      }
+
+      h5 {
+        font-weight: 400;
+        display: none;
+        @include breakpoints.md {
+          display: block;
+        }
+      }
+      &:hover {
+        background-color: rgba(255, 255, 0, 0.236);
+        // background-color: red;
+      }
+
+      svg {
+        height: 2rem;
+        width: 2rem;
+        @include breakpoints.md {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+      &.hideOnSmallScreen {
+        display: none;
+        @include breakpoints.md {
+          display: flex;
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ const router = express_1.default.Router();
 router.get("/", posts_js_1.getPosts);
 router.get("/search", posts_js_1.searchPosts);
 router.get("/:id", posts_js_1.getSinglePost);
+router.get("/getUserPosts/:creatorId", posts_js_1.getUserPosts);
 router.post("/", auth_js_1.default, posts_js_1.createPost);
 router.patch("/:id", auth_js_1.default, posts_js_1.updatePost);
 router.delete("/:id", auth_js_1.default, posts_js_1.deletePost);

@@ -13,7 +13,8 @@ export const getPosts = async (req: Request, res: Response) => {
     const posts = await PostMessage.find()
       .sort({ _id: -1 })
       .limit(LIMIT)
-      .skip(startIndex);
+      .skip(startIndex)
+      .populate({ path: "creator", select: "name avatarImage" });
     res.status(200).json({
       data: posts,
       currentPage: Number(page),
@@ -28,8 +29,21 @@ export const getSinglePost = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const post = await PostMessage.findById(id);
+    const post = await PostMessage.findById(id).populate({
+      path: "creator",
+      select: "name avatarImage",
+    });
     res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getUserPosts = async (req: Request, res: Response) => {
+  const { creatorId } = req.params;
+  try {
+    const posts = await PostMessage.find({ creator: creatorId });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -44,7 +58,7 @@ export const searchPosts = async (req: Request, res: Response) => {
       $or: [{ title }, { tags: { $in: tags?.toString().split(",") } }],
     });
 
-    res.json({ data: posts });
+    res.json(posts);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -61,7 +75,7 @@ export const createPost = async (req: any, res: Response) => {
     message: message !== "" ? message : "No message",
     selectedFile,
     tags,
-    name,
+    name: req.userId,
     creator: req.userId,
     createdAt: new Date().toISOString(),
   });
@@ -118,6 +132,9 @@ export const likePost = async (req: any, res: Response) => {
 
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
       new: true,
+    }).populate({
+      path: "creator",
+      select: "name avatarImage",
     });
     res.json(updatedPost);
   }
@@ -134,6 +151,9 @@ export const commentPost = async (req: Request, res: Response) => {
 
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
       new: true,
+    }).populate({
+      path: "creator",
+      select: "name avatarImage",
     });
     res.json(updatedPost);
   }

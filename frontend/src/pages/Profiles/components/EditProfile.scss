@@ -1,0 +1,88 @@
+@use "../../../styles/abstracts/breakpoints.scss";
+@use "../../../styles/abstracts/colors.scss";
+
+.user {
+  width: 80%;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.3rem;
+  font-size: 1.9rem;
+  padding: 2rem 2rem;
+
+  &__changeAvatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      border-radius: 50%;
+
+      width: 2rem;
+      height: 2rem;
+      @include breakpoints.l {
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+    &__cameraImage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      cursor: pointer;
+      background-color: rgba(164, 164, 164, 0.448);
+      border-radius: 50%;
+
+      img {
+        height: 80%;
+        width: 80%;
+      }
+      @include breakpoints.l {
+        height: 4rem;
+        width: 4rem;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__forms {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    label {
+      align-self: center;
+      font-size: 1rem;
+    }
+    &__input {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      font-size: 1rem;
+    }
+  }
+}
+
+.setAvatarContainer {
+  background-color: #131324;
+  padding: 3rem;
+  margin: 0 auto;
+  .buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      width: 40%;
+    }
+  }
+}
