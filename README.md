@@ -2,7 +2,7 @@
 
 <p>Whereabouts is a platform where you can share the amazing places you have visited with other people.</p>
 
-<code>https://whereabouts-five.vercel.app/posts</code>
+<code>https://where-abouts.vercel.app/</code>
 
 
 <h1>Features</h1>
