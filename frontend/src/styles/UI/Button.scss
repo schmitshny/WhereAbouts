@@ -1,0 +1,42 @@
+@use "./../abstracts/colors.scss";
+@use "./../abstracts/breakpoints.scss";
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+
+  border: none;
+  cursor: pointer;
+
+  &--primary {
+    background-image: linear-gradient(
+      to right,
+      #a1c4fd 0%,
+      #c2e9fb 51%,
+      colors.$yellow 100%
+    );
+  }
+  &--secondary {
+    background-image: linear-gradient(
+      to right,
+      colors.$pink-secondary 0%,
+      #ff95ec 51%,
+      colors.$pink-primary 100%
+    );
+    @include breakpoints.l {
+    }
+  }
+
+  &:hover {
+    background-position: right center; /* change the direction of the change here */
+  }
+  &:disabled {
+    background-color: gray;
+    background-image: none;
+  }
+}
