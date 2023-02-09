@@ -1,0 +1,22 @@
+.chatPageContainer {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  .chat {
+    background-color: white;
+    box-shadow: 0 0.0625rem 0.25rem rgba(black, 0.1),
+      0 0 0.125rem rgba(black, 0.1);
+    width: 60%;
+    height: 80vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+    @media screen and (min-width: 720px) {
+      grid-template-columns: 35% 65%;
+      grid-template-rows: none;
+    }
+    @media screen and (min-width: 1100px) {
+      grid-template-columns: 28% 72%;
+    }
+  }
+}

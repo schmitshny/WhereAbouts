@@ -9,6 +9,7 @@ import Auth from "./pages/Auth/Auth";
 import Profile from "./pages/Profiles/components/Profile";
 import Account from "./pages/Profiles/Account";
 import PostDetails from "./pages/PostDetails/PostDetails";
+import Chat from "./pages/Chat/Chat";
 
 function App() {
   const isUserLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -33,6 +34,12 @@ function App() {
             path="/account/*"
             element={
               isUserLoggedIn ? <Account /> : <Navigate replace to="/posts" />
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              isUserLoggedIn ? <Chat /> : <Navigate replace to="/posts" />
             }
           />
         </Routes>

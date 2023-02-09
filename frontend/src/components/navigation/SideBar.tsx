@@ -38,12 +38,12 @@ const Sidebar: React.FC<SidebarProps> = ({ openSearch, openForm }) => {
           <SearchOutlinedIcon />
           <h5>Search</h5>
         </li>
-        {/* <li>
-          <NavLink to="/">
+        <li>
+          <NavLink to="/chat">
             <ForumOutlinedIcon />
             <h5>Chat</h5>
           </NavLink>
-        </li> */}
+        </li>
         <li onClick={openForm}>
           <AddBoxOutlinedIcon />
           <h5>Create</h5>

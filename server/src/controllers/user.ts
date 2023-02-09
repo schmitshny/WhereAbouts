@@ -150,3 +150,21 @@ export const getUserInfo = async (
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await User.find({ _id: { $ne: req.params.id } }).select([
+      "name",
+      "lastName",
+      "avatarImage",
+      "_id",
+    ]);
+    return res.json(users);
+  } catch (ex) {
+    next(ex);
+  }
+};

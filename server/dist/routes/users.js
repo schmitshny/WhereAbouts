@@ -12,4 +12,5 @@ router.patch("/setAvatar/:id", user_1.setAvatar);
 router.patch("/editAccount/:id", user_1.editAccount);
 router.patch("/changePassword", user_1.changePassword);
 router.get("/getUserInfo/:id", user_1.getUserInfo);
+router.get("/allUsers/:id", user_1.getAllUsers);
 exports.default = router;

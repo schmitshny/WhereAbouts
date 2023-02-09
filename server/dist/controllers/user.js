@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserInfo = exports.editAccount = exports.setAvatar = exports.signup = exports.changePassword = exports.signin = void 0;
+exports.getAllUsers = exports.getUserInfo = exports.editAccount = exports.setAvatar = exports.signup = exports.changePassword = exports.signin = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
@@ -127,3 +127,18 @@ const getUserInfo = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.getUserInfo = getUserInfo;
+const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield user_1.default.find({ _id: { $ne: req.params.id } }).select([
+            "name",
+            "lastName",
+            "avatarImage",
+            "_id",
+        ]);
+        return res.json(users);
+    }
+    catch (ex) {
+        next(ex);
+    }
+});
+exports.getAllUsers = getAllUsers;

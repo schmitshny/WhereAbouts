@@ -4,9 +4,10 @@ import searchQuery from "../interfaces/searchQuery";
 import { IFetchPost, Post } from "../interfaces/Posts";
 
 const API_URL = process.env.REACT_APP_API_URL;
+export const host = "http://localhost:5000";
 
 const API = axios.create({
-  baseURL: API_URL,
+  baseURL: "http://localhost:5000",
 });
 
 API.interceptors.request.use((req) => {
@@ -82,6 +83,10 @@ export const getUser = (
   AxiosResponse<{ name: string; lastName: string; avatarImage: string }>
 > => API.get(`user/getUserInfo/${id}`);
 
+export const getAllUsers = (
+  currentUserId: string
+): Promise<AxiosResponse<User[]>> => API.get(`/user/allUsers/${currentUserId}`);
+
 export const changePassword = (
   password: string,
   newPassword: string,
@@ -92,3 +97,16 @@ export const changePassword = (
     newPassword: newPassword,
     userId: id,
   });
+
+//chat
+export const getAllMessages = (from: string, to: string) =>
+  API.post(`/messages/getMessages`, { from, to });
+
+export const sendMessage = (
+  from: string,
+  to: string,
+  message: string,
+  image: string = ""
+) => {
+  API.post(`/messages/addMessage`, { from, to, message, image });
+};
