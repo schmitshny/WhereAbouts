@@ -3,11 +3,11 @@ import { User, userEditedData } from "../interfaces/User/User";
 import searchQuery from "../interfaces/searchQuery";
 import { IFetchPost, Post } from "../interfaces/Posts";
 
-const API_URL = process.env.REACT_APP_API_URL;
-export const host = "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+export const host = API_URL;
 
 const API = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: API_URL,
 });
 
 API.interceptors.request.use((req) => {
