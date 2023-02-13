@@ -37,7 +37,7 @@ const Account = () => {
                 <NavLink to="/account/posts">Posts</NavLink>
               </li>
               <li>
-                <NavLink to="/account/edit">Help</NavLink>
+                <NavLink to="/help/">Help</NavLink>
               </li>
             </ul>
           </nav>
