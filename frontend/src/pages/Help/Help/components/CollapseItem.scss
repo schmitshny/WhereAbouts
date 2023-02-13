@@ -1,0 +1,17 @@
+.collapsible {
+  &__header {
+    padding: 6px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    &:hover {
+      background-color: rgb(242, 242, 242);
+    }
+  }
+  &__content {
+    padding: 2rem;
+  }
+}

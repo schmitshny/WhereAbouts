@@ -10,6 +10,7 @@ import Profile from "./pages/Profiles/components/Profile";
 import Account from "./pages/Profiles/Account";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import Chat from "./pages/Chat/Chat";
+import Help from "./pages/Help/Help";
 
 function App() {
   const isUserLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -23,6 +24,7 @@ function App() {
           <Route path="/posts" element={<Home />} />;
           <Route path="/posts/search" element={<Home />} />
           <Route path="/posts/:id" element={<PostDetails />} />
+          <Route path="/help/*" element={<Help />} />
           <Route
             path="/auth"
             element={

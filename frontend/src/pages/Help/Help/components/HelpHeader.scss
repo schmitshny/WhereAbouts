@@ -1,0 +1,25 @@
+@use "../../../../styles/abstracts/colors.scss";
+
+.YourProfileHeader {
+  width: 100%;
+  background: linear-gradient(
+    270deg,
+    colors.$pink-primary 1%,
+    colors.$yellow 83%
+  );
+  height: 70px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
+
+  h1 {
+    align-self: center;
+  }
+
+  @media screen and (min-width: 720px) {
+    height: 100px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}

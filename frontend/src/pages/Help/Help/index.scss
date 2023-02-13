@@ -1,0 +1,57 @@
+.HelpArticleContainer {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.helpTextPrimary {
+  font-size: 1.1rem;
+}
+.helpTextSecondary {
+  font-size: 1rem;
+  text-align: left;
+}
+
+.helpPrimaryHeader {
+  font-size: 1.2rem;
+}
+
+.helpLinkPrimary a {
+  text-decoration: none;
+  color: rgb(0, 149, 246);
+  list-style: none;
+  font-size: 1.2rem;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+ol {
+  text-align: left;
+  margin-bottom: 4rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+  li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    .small {
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 50%;
+      margin: auto 0.3rem;
+    }
+    .screenshot {
+      width: 100%;
+      padding: 0.9rem;
+      img {
+        max-width: 50%;
+        max-height: 300px;
+      }
+      // max-width: 50%;
+      // max-height: 300px;
+      // flex-basis: 100%;
+    }
+  }
+}

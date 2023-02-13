@@ -1,0 +1,19 @@
+.help-container {
+  width: 100%;
+  background-color: white;
+  min-height: 80vh;
+
+  @media screen and (min-width: 720px) {
+    display: grid;
+    grid-template-columns: 35% 65%;
+  }
+  @media screen and (min-width: 1000px) {
+    display: grid;
+    grid-template-columns: 25% 75%;
+  }
+}
+
+.helpparagraph {
+  font-size: 1.3rem;
+  line-height: 1.9rem;
+}

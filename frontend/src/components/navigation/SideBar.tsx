@@ -48,21 +48,20 @@ const Sidebar: React.FC<SidebarProps> = ({ openSearch, openForm }) => {
           <AddBoxOutlinedIcon />
           <h5>Create</h5>
         </li>
-        {isUserLogged && (
-          <li>
-            <NavLink to="/account/edit">
-              <SettingsOutlinedIcon />
-              <h5>Settings</h5>
-            </NavLink>
-          </li>
-        )}
 
-        {/* <li className="hideOnSmallScreen">
-          <NavLink to="/">
+        <li>
+          <NavLink to="/account/edit">
+            <SettingsOutlinedIcon />
+            <h5>Settings</h5>
+          </NavLink>
+        </li>
+
+        <li className="hideOnSmallScreen">
+          <NavLink to="/help">
             <HelpCenterOutlinedIcon />
             <h5>Help</h5>
           </NavLink>
-        </li> */}
+        </li>
 
         {isUserLogged && (
           <li onClick={handleLogout} className="hideOnSmallScreen">

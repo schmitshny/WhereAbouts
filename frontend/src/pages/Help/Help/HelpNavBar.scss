@@ -1,0 +1,32 @@
+@use "../../../styles/abstracts/breakpoints.scss";
+
+.helpnavbar {
+  box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
+  background-color: white;
+  position: absolute;
+  padding-top: 45px;
+  width: 100%;
+  max-width: 390px;
+  display: none;
+
+  @media screen and (min-width: 720px) {
+    display: block;
+    position: relative;
+    max-width: 600px;
+    padding: 0;
+  }
+}
+
+.open {
+  display: block;
+}
+
+.hamburgerIcon {
+  position: absolute;
+  z-index: 1000;
+  margin-top: 20px;
+  margin-left: 16px;
+  @media screen and (min-width: 720px) {
+    display: none;
+  }
+}

@@ -1,0 +1,43 @@
+.relatedTopics {
+  padding: 2rem 1.3rem;
+  h2 {
+    padding-bottom: 1rem;
+  }
+  &__topic {
+    a {
+      background-color: rgb(250, 250, 250);
+      display: flex;
+      align-content: center;
+      padding: 1.4rem 1.4rem;
+      margin-bottom: 1rem;
+      color: black;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(237, 237, 237);
+      }
+      p {
+        flex-grow: 1;
+        font-weight: 500;
+        align-self: center;
+        padding: 0 0.6rem;
+      }
+      svg {
+        align-self: center;
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+      // img {
+      //   height: 30px;
+      //   width: 30px;
+      // }
+      .arrow {
+        justify-self: flex-end;
+        svg {
+          align-self: center;
+        }
+      }
+    }
+  }
+}
