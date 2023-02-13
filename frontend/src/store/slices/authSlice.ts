@@ -4,11 +4,13 @@ import { SignedUser } from "../../interfaces/User/User";
 import * as api from "../../api/index";
 import { AppDispatch } from "../store";
 import { NavigateFunction } from "react-router-dom";
+import { sign } from "crypto";
 interface AuthState {
   authData: null | SignedUser;
   isLoggedIn: boolean;
   errors: string;
   avatar: string;
+  loading: boolean;
 }
 
 const initialState: AuthState = {
@@ -16,6 +18,7 @@ const initialState: AuthState = {
   isLoggedIn: localStorage.getItem("profile") ? true : false,
   errors: "",
   avatar: "",
+  loading: false,
 };
 
 export const signin = createAsyncThunk<
@@ -108,6 +111,24 @@ export const authSlice = createSlice({
       let data = JSON.parse(localStorage.getItem("profile") || "") as any;
       data.result = action.payload;
       localStorage.setItem("profile", JSON.stringify(data));
+    });
+    builder.addCase(signin.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(signin.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(signin.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(signup.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(signup.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(signup.rejected, (state) => {
+      state.loading = false;
     });
   },
 });
