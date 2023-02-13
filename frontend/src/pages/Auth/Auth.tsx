@@ -31,6 +31,7 @@ const Auth = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const isLoading = useAppSelector((state) => state.auth.loading);
   const [isSignup, setIsSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<User>(initialUserState);
@@ -147,6 +148,7 @@ const Auth = () => {
             className="btn btn--primary"
             type="submit"
             style={{ marginTop: "1rem", width: "100%" }}
+            disabled={isLoading}
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </button>
