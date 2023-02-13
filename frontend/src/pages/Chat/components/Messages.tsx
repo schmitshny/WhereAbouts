@@ -29,7 +29,7 @@ const Messages: React.FC<MessagesProps> = ({ messages }) => {
             <div
               className={`message ${message.fromSelf ? "sended" : "recieved"}`}
             >
-              {message.message && (
+              {message.message.text && (
                 <div className="content ">{<p>{message.message.text}</p>}</div>
               )}
               {message.image && (

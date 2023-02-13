@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 100%;
   @include breakpoints.l {
+    flex-direction: row;
   }
 
   &__comments {
