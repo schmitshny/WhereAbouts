@@ -54,6 +54,24 @@
       cursor: pointer;
       padding: 1rem;
     }
+
+    .report {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      display: flex;
+      flex-direction: column;
+      min-width: 50px;
+      .reportButton {
+        border: 1px solid pink;
+        padding: 0.3rem;
+      }
+      button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    }
   }
 
   &__body {

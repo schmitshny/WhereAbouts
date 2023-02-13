@@ -1,20 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
-import { Delete, MoreHoriz } from "@material-ui/icons";
+import { MoreHoriz } from "@material-ui/icons";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import moment from "moment";
 import defaultAvatar from "./../../../../assets/profile-empty-image.png";
 import { Post } from "../../../../interfaces/Posts";
 import { useAppDispatch } from "../../../../store/store";
 import {
-  removePost,
   addLikePost,
   getPostsBySearch,
 } from "../../../../store/slices/postSlice";
 import Likes from "./Likes";
-
+import { toast } from "react-toastify";
+import { ToastOptions } from "react-toastify";
 import "./SinglePost.scss";
+import { toastOptions } from "../../../../utils/ToastOptions";
 
 interface SinglePostProps {
   post: Post;
@@ -31,6 +32,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ post, setCurrentId }) => {
   const [showFullMessage, setShowFullMessage] = useState(false);
   const userId = user?.result?.googleId || user?.result?._id;
   const isAlreadyLiked = likes.find((like) => like === userId);
+  const [showReportButton, setShowReportButton] = useState(false);
 
   const handleLikeClick = async () => {
     if (userId) {
@@ -66,6 +68,11 @@ const SinglePost: React.FC<SinglePostProps> = ({ post, setCurrentId }) => {
     navigate(`/posts/search?searchQuery="none"&tags=${tag}`);
   };
 
+  const handleReportPost = () => {
+    setShowReportButton(false);
+    toast.success("Thank you, We'll take a look at this post.", toastOptions);
+  };
+
   return (
     <article className="card">
       <header className="card__header">
@@ -89,6 +96,16 @@ const SinglePost: React.FC<SinglePostProps> = ({ post, setCurrentId }) => {
         <h5 onClick={openPost} className="card__header__title">
           {post.title}
         </h5>
+        <section className="report">
+          <button onClick={() => setShowReportButton(!showReportButton)}>
+            <MoreHoriz style={{ color: "pink", fontSize: "2rem" }} />
+          </button>
+          {showReportButton && (
+            <button className="reportButton" onClick={handleReportPost}>
+              Report
+            </button>
+          )}
+        </section>
       </header>
 
       {(user?.result?.googleId === post?.creator ||
