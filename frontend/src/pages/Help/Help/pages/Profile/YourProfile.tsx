@@ -5,6 +5,8 @@ import CollapseItem from "../../components/CollapseItem";
 import emptyProfileImage from "../../../../../assets/profile-empty-image.png";
 import changeAvatarImage from "../../../../../assets/help/changeAvatar.png";
 import cropAvatar from "../../../../../assets/help/cropAvatar.png";
+import changeBio from "../../../../../assets/help/changeBio.png";
+import updatenamelastname from "../../../../../assets/help/updatenamelastname.png";
 
 const YourProfile = () => {
   return (
@@ -28,7 +30,12 @@ const YourProfile = () => {
               </li>
               <li>2. Click Profile at the right, then click Bio</li>
               <li>3. Write your bio to your account.</li>
-              <li>4. Click edit profile</li>
+              <li>
+                4. Click edit profile{" "}
+                <div className="screenshot">
+                  <img src={changeBio} alt="change avatar screen" />
+                </div>
+              </li>
             </ol>
           }
         />
@@ -42,7 +49,12 @@ const YourProfile = () => {
               </li>
               <li>2. Click Profile at the left, then click name</li>
               <li>3. Edit your name</li>
-              <li>4. Click edit profile</li>
+              <li>
+                4. Click edit profile{" "}
+                <div className="screenshot">
+                  <img src={updatenamelastname} alt="change avatar screen" />
+                </div>
+              </li>
             </ol>
           }
         />
