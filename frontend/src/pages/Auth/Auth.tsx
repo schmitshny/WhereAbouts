@@ -37,17 +37,6 @@ const Auth = () => {
   const [formData, setFormData] = useState<User>(initialUserState);
   let errorMessage = useAppSelector((state) => state.auth.errors);
 
-  useEffect(() => {
-    const start = () => {
-      gapi.client.init({
-        clientId:
-          "1078745035342-taj9r7kf39bjtl7dql1kqkso6v2lqrjk.apps.googleusercontent.com",
-        scope: "email",
-      });
-    };
-    gapi.load("client:auth2", start);
-  }, []);
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     if (isSignup) {
